@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-cache-path name="cache_download" path="download"/>
+    Context.getExternalCacheDir()
+    <!--apk存放位置-->
+    <!--Environment.getExternalStorageDirectory().getAbsolutePath()-->
+
+    <!--其中根元素<paths>是固定的，内部元素可以是以下节点：-->
+    <!--<files-path name="name" path="path" /> 对应getFilesDir()。-->
+    <!--<cache-path name="name" path="path" /> 对应getCacheDir()。-->
+    <!--<external-path name="name" path="path" /> 对应Environment.getExternalStorageDirectory()。-->
+    <!--<external-files-path name="name" path="path" /> 对应getExternalFilesDir()。-->
+    <!--<external-cache-path name="name" path="path" /> 对应getExternalCacheDir()。-->
+    <root-path
+        name="root_path"
+        path="." />
+</paths>

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.zz.eshuo.as30"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.android.support:support-v4:26.0.0-beta1'
     implementation 'com.android.support:support-vector-drawable:26.0.0-beta1'
     compile 'com.umeng.analytics:analytics:latest.integration' //友盟
+    compile 'com.simplepeng:updaterlibrary:1.0.2'   // 更新
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'

@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.simplepeng.updaterlibrary.Updater;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -98,6 +99,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        String url = "http://192.168.31.154:1112/app.apk";
+
+        updater = new Updater.Builder(this)
+                .setDownloadUrl(url)
+                .setApkFileName("test.apk")
+                .setNotificationTitle("updater")
+                .start();
     }
 
     private void populateAutoComplete() {
