@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -343,6 +344,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // 跳转到mainactivity
                 Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
                 startActivity(intent);
+                Log.e("aa","intent");
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
