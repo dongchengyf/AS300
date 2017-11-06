@@ -31,7 +31,7 @@
         android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.zz.eshuo.foodsafety.fileprovider"
+            android:authorities="com.zz.eshuo.as30.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

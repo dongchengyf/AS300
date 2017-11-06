@@ -29,7 +29,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.simplepeng.updaterlibrary.Updater;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -97,16 +96,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
         String url = "http://192.168.31.154:1112/app.apk";
 
-        updater = new Updater.Builder(this)
-                .setDownloadUrl(url)
-                .setApkFileName("test.apk")
-                .setNotificationTitle("updater")
-                .start();
+//        updater = new Updater.Builder(this)
+//                .setDownloadUrl(url)
+//                .setApkFileName("test.apk")
+//                .setNotificationTitle("updater")
+//                .start();
     }
 
     private void populateAutoComplete() {
@@ -353,7 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // 跳转到mainactivity
                 Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
                 startActivity(intent);
-                Log.e("aa","intent");
+                Log.e("aa", "intent");
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

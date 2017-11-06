@@ -2,24 +2,54 @@ package com.zz.eshuo.as30;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.AppCompatDelegate;
+import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
+import android.widget.Button;
 
+import java.util.List;
+
+/**
+ * @author ADMIN
+ */
 public class TestActivity extends PreferenceActivity {
 
-    private AppCompatDelegate mDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getDelegate().installViewFactory();
-        getDelegate().onCreate(savedInstanceState);
+
         super.onCreate(savedInstanceState);
+
+        if (hasHeaders()) {
+            Button button = new Button(this);
+            button.setText("Exit");
+            setListFooter(button);
+        }
+
     }
 
-    private AppCompatDelegate getDelegate() {
-        if (mDelegate == null) {
-            mDelegate = AppCompatDelegate.create(this, null);
+
+    @Override
+    protected boolean isValidFragment(String fragmentName) {
+        System.out.println(fragmentName);
+        return true;
+    }
+
+    @Override
+    public void onBuildHeaders(List<Header> target) {
+        loadHeadersFromResource(R.xml.preference_home, target);
+    }
+
+
+    public static class Prefs1Fragment extends PreferenceFragment {
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preference_frag1);
         }
-        return mDelegate;
+    }
+
+    public static class Prefs2Fragment extends PreferenceFragment {
+
     }
 
 }
