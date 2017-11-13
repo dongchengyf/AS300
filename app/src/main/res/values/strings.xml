@@ -188,4 +188,8 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_main4">Main4Activity</string>
+    <string name="title_activity_main5">Main5Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

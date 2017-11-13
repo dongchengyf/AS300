@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, TestActivity.class);
+                Intent intent = new Intent(LoginActivity.this, GreenDaoDemo.class);
                 startActivity(intent);
             }
         });
