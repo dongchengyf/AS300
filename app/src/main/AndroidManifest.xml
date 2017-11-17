@@ -132,6 +132,7 @@
             android:label="@string/title_activity_main5" />
 
         <activity android:name=".GreenDaoDemo" />
+        <activity android:name=".NumToCn" />
     </application>
 
 </manifest>

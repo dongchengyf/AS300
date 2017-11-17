@@ -3,7 +3,11 @@ package com.zz.eshuo.as30;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,6 +19,7 @@ import com.afa.tourism.greendao.gen.DaoMaster;
 import com.afa.tourism.greendao.gen.DaoSession;
 import com.afa.tourism.greendao.gen.UserDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -47,12 +52,20 @@ public class GreenDaoDemo extends AppCompatActivity {
     LinearLayout drawerLayout;
     @InjectView(R.id.tv_info)
     TextView tvInfo;
+    @InjectView(R.id.rv_view)
+    RecyclerView mRecyclerView;
+
     private UserDao dao;
     private String name;
     private String age;
     private String sex;
     private String salary;
     private DaoSession mDaoSession;
+
+    private RecyclerView.Adapter mAdapter;
+
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<String> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,91 @@ public class GreenDaoDemo extends AppCompatActivity {
 //        String sql = "insert into user values (null,'111')";
 //        AFaApplication.getApplication().getDaoSession().getDatabase().execSQL(sql);
 
+
+////设置布局管理器
+//        RecyclerView.LayoutManager layout = null;
+//        mRecyclerView.setLayoutManager(layout);
+////设置adapter
+//        mRecyclerView.setAdapter(adapter);
+////设置Item增加、移除动画
+//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+////添加分割线
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(
+//                this, DividerItemDecoration.HORIZONTAL_LIST));
+
+        initData();
+        initView();
+
+    }
+
+    private void initData() {
+        data = getData();
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mAdapter = new MyAdapter();
+    }
+
+    private void initView() {
+
+        // 设置布局管理器
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        // 设置adapter
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private ArrayList<String> getData() {
+        ArrayList<String> data = new ArrayList<>();
+        String temp = " item";
+        for (int i = 0; i < 20; i++) {
+            data.add(i + temp);
+        }
+
+        return data;
+    }
+
+
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // 实例化展示的view
+            View v = LayoutInflater.from(GreenDaoDemo.this).inflate(R.layout.item_rv, parent, false);
+            // 实例化viewholder
+            ViewHolder viewHolder = new ViewHolder(v);
+            return viewHolder;
+
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            // 绑定数据
+            holder.mTv.setText(data.get(position));
+        }
+
+        public void remove(int position) {
+            data.remove(position);
+            notifyItemRemoved(position);
+        }
+
+        public void add(String text, int position) {
+            data.add(position, text);
+            notifyItemInserted(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return data == null ? 0 : data.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView mTv;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                mTv = (TextView) itemView.findViewById(R.id.item_tv);
+            }
+        }
     }
 
 
@@ -158,13 +256,22 @@ public class GreenDaoDemo extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_in:
-                insertData();
+//                insertData();
+                data.add(0, "www.lyf.xyz");
+                mAdapter.notifyItemChanged(0);
+                mRecyclerView.scrollToPosition(0);
+                mAdapter.notifyDataSetChanged();
+
                 break;
             case R.id.bt_de:
-                deleteDate(1);
+//                deleteDate(1);
+                data.remove(0);
+                mAdapter.notifyItemChanged(0);
+                mAdapter.notifyDataSetChanged();
                 break;
             case R.id.bt_up:
-                updateData(1);
+//                updateData(1);
+                mAdapter.notifyItemMoved(1,2);
                 break;
             case R.id.bt_qu:
                 queryData();
